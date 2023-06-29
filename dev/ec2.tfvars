@@ -1,4 +1,5 @@
-ec2_keyname       = "assign1"
+ec2_keyname    = "assign1"
+sg_name        = "security_group3"
 ec2_default_tags = {
   "Name"        = "Dev Application Server"
   "Environment" = "Dev"
