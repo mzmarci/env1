@@ -19,32 +19,15 @@ pipeline {
         }
         stage ('plan') {
             steps {
-                //terraform init -backend-config=../env1/"${TARGET_ENV}"/backend.tfvars
-                //terraform plan -var-file ../env1/"${TARGET_ENV}"/backend.tfvars -var-file ../env1/"${TARGET_ENV}"/ec2.tfvars
                 sh '''
                 cd codebase1
 
                 terraform init -backend-config=../env1/dev/backend.tfvars
                 terraform plan -var-file ../env1/dev/backend.tfvars -var-file ../env1/dev/ec2.tfvars
-                    '''
-
-           // script {
-                //env.NEXT_STEP = input message: 'implement plan ?', ok: 'implement',
-                //parameters: [choice (name: 'implement', choices: 'apply/ndestroy/ndo nothing', description: 'implementation stage')]
-           // }        
+                    '''       
           }
         }
-        //stage ('implement') {
-           // when {
-               // anyOf {
-                    //expression {
-                       //env.NEXT_STEP == 'apply'
-                    //}
-                    //expression {
-                        //env.NEXT_STEP == 'destroy'
-                    //}
-                //}
-           // }
+        stage ('apply') {
             steps {
                 //terraform init -backend-config=../env1/"${TARGET_ENV}"/backend.tfvars
                 //terraform apply -var-file ../env1/"${TARGET_ENV}"/backend.tfvars -var-file ../env1/"${TARGET_ENV}"/ec2.tfvars -auto-approve
@@ -62,3 +45,4 @@ pipeline {
             deleteDir()
         }
      }
+}
