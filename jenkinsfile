@@ -1,12 +1,11 @@
 pipeline {
     agent any
-
-     environment {
+    environment {
         AWS_ACCESS_KEY_ID = credentials ('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials ('AWS_SECRET_ACCESS_KEY')
      }
 
-     stages {
+    stages {
         stage ("download codebase1 and env1 config") {
             steps {
                 sh 'git clone https://github.com/mzmarci/codebase1.git'
@@ -34,9 +33,9 @@ pipeline {
         }
     }
 
-     post {
+    post {
         always {
             deleteDir()
         }
-     }
+    }
 }
