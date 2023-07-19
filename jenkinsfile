@@ -12,16 +12,7 @@ pipeline {
                 sh 'git clone https://github.com/mzmarci/env1.git'
             }
         }
-        stage ('plan') {
-            steps {
-                sh '''
-                cd codebase1
-
-                terraform init -backend-config=../env1/dev/backend.tfvars
-                terraform plan -var-file ../env1/dev/backend.tfvars -var-file ../env1/dev/ec2.tfvars
-                    '''       
-          }
-        }
+        
         stage ('apply') {
             steps {
                 sh '''
